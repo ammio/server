@@ -1,0 +1,29 @@
+{
+  "name": "klir",
+  "version": "0.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dominicegginton/klir.git"
+  },
+  "author": {
+    "name": "Dominic Egginton",
+    "email": "dominic.egginton@gmail.com",
+    "url": "https://dominicegginton.dev"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dominicegginton/klir/issues"
+  },
+  "homepage": "https://github.com/dominicegginton/klir#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6",
+    "standard": "^16.0.1"
+  }
+}

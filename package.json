@@ -25,5 +25,12 @@
   "devDependencies": {
     "nodemon": "^2.0.6",
     "standard": "^16.0.1"
+  },
+  "dependencies": {
+    "@koa/router": "^9.4.0",
+    "koa": "^2.13.0",
+    "koa-sassy": "^1.0.4",
+    "koa-views": "^6.3.1",
+    "pug": "^3.0.0"
   }
 }

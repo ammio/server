@@ -24,7 +24,7 @@
   "homepage": "https://github.com/dominicegginton/klir#readme",
   "devDependencies": {
     "nodemon": "^2.0.6",
-    "standard": "^16.0.1"
+    "standard": "^16.0.2"
   },
   "dependencies": {
     "@koa/router": "^10.0.0",

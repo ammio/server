@@ -2,6 +2,7 @@
 
 /* IMPORT MODULES */
 const Koa = require('koa')
+const cors = require('@koa/cors')
 const MongoClient = require('mongodb').MongoClient
 
 /* GLOBALS */
@@ -11,6 +12,7 @@ const MONGO_PORT = process.env.MONGO_PORT || 27017
 
 /* KOA SETUP */
 const app = new Koa()
+app.use(cors())
 
 /* START SERVER */
 ;(async () => {

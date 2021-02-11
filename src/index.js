@@ -20,5 +20,5 @@ app.use(views(path.join(__dirname, '/views'), { extension: 'pug' }))
 
 /* START SERVER */
 app.server.listen(PORT, () => {
-  console.log(`klir started on port ${PORT}`)
+  console.log(`ammio started on port ${PORT}`)
 })

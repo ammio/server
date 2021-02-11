@@ -1,9 +1,7 @@
 'use strict'
 
-/* KOA MODULES */
+/* IMPORT MODULES */
 const Koa = require('koa')
-
-/* MODULES */
 const http = require('http')
 
 /* GLOBALS */

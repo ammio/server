@@ -1,8 +1,8 @@
 name: CI
 on: push
 jobs:
-  lint:
-    name: Lint
+  lint-server:
+    name: Lint Server
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -11,5 +11,7 @@ jobs:
         node-version: 14
     - name: Install dependencies 
       run: npm i
+      working-directory: server
     - name: Lint
       run: npm run lint
+      working-directory: server

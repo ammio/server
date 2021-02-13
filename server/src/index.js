@@ -3,6 +3,7 @@
 /* IMPORT MODULES */
 const Koa = require('koa')
 const cors = require('@koa/cors')
+const bodyParser = require('koa-bodyparser')
 const MongoClient = require('mongodb').MongoClient
 
 /* IMPORT ROUTERS */
@@ -16,6 +17,7 @@ const MONGO_PORT = process.env.MONGO_PORT || 27017
 /* KOA SETUP */
 const app = new Koa()
 app.use(cors())
+app.use(bodyParser({ enableTypes: ['json', 'text'] }))
 
 /* SETUP ROUTERS */
 app.use(apiRouter.routes())

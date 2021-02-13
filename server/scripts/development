@@ -1,0 +1,26 @@
+#!/bin/sh
+
+export NODE_ENV=development
+export PORT=3000
+export MONGO_URL=localhost
+export MONGO_PORT=27017
+
+MONGO_CONTAINER_NAME=ammio_mongo
+
+trap clean INT
+
+function clean () {
+  echo ''
+  echo -n '• Cleaning development enviroment: '
+  docker stop $MONGO_CONTAINER_NAME  > /dev/null 2> /dev/null
+  docker rm $MONGO_CONTAINER_NAME  > /dev/null 2> /dev/null
+  echo 'completed'
+  exit
+}
+
+echo -n '• Starting mongo container: '
+docker run --name $MONGO_CONTAINER_NAME -v $MONGO_CONTAINER_NAME:/data/db -p $MONGO_PORT:$MONGO_PORT/tcp -d mongo:latest  > /dev/null 2> /dev/null
+echo 'completed'
+
+echo '• Starting ammio development server'
+nodemon src/index.js

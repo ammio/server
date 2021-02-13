@@ -1,0 +1,18 @@
+#!/bin/sh
+
+MONGO_CONTAINER_NAME=ammio_mongo
+
+echo -n '• Cleaning development enviroment: '
+docker stop $MONGO_CONTAINER_NAME > /dev/null 2> /dev/null
+docker rm $MONGO_CONTAINER_NAME > /dev/null 2> /dev/null
+echo 'completed'
+
+read -p '• Do you wish to remove mongo database data (y/n)?  ' yn
+case $yn in
+  [Yy] )
+    echo -n '• Removing mongo database data: '
+    docker volume rm $MONGO_CONTAINER_NAME > /dev/null 2> /dev/null
+    echo 'completed';;
+  * )
+    echo '• Removing monogo database data: skipped';;
+esac

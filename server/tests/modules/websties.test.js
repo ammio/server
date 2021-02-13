@@ -2,7 +2,7 @@
 'use strict'
 
 /* IMPORT TEST */
-const Websites = require('../src/modules/websites')
+const Websites = require('../../src/modules/websites')
 
 /* IMPORT MODULES */
 const MongoClient = require('mongodb').MongoClient

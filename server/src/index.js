@@ -8,6 +8,7 @@ const MongoClient = require('mongodb').MongoClient
 
 /* IMPORT ROUTERS */
 const apiRouter = require('./routes/api')
+const analyticsRouter = require('./routes/analytics')
 
 /* GLOBALS */
 const PORT = process.env.PORT || 3000
@@ -22,6 +23,8 @@ app.use(bodyParser({ enableTypes: ['json', 'text'] }))
 /* SETUP ROUTERS */
 app.use(apiRouter.routes())
 app.use(apiRouter.allowedMethods())
+app.use(analyticsRouter.routes())
+app.use(analyticsRouter.allowedMethods())
 
 /* START SERVER */
 ;(async () => {

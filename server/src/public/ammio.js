@@ -65,8 +65,8 @@ async function ammio () {
     port = url.port
   }
 
-  /* ANALYTICS DATA */
-  const analytics = {
+  /* CLIENT DATA */
+  const client = {
     fingerprint: fingerprint(),
     page: window.location.pathname,
     referrer: window.document.referrer,
@@ -85,7 +85,7 @@ async function ammio () {
   if (!navigator.sendBeacon) return
   setInterval(async () => {
     console.log('ping')
-    const ping = JSON.stringify({ fingerprint: analytics.fingerprint, visit: visit })
+    const ping = JSON.stringify({ fingerprint: client.fingerprint, visit: visit })
     navigator.sendBeacon(`http://${hostname}:${port}/analytics/ping`, ping)
   }, 1000 * 60)
 
@@ -102,7 +102,7 @@ async function ammio () {
     if (unload._hasUnloaded) return
     unload._hasUnloaded = true
     blur()
-    const close = JSON.stringify({ fingerprint: analytics.fingerprint, duration: duration, visit: visit.id })
+    const close = JSON.stringify({ fingerprint: client.fingerprint, duration: duration, visit: visit.id })
     navigator.sendBeacon('http://localhost:3000/analytics/close', close)
   }
   window.addEventListener('unload', unload)

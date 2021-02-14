@@ -80,6 +80,33 @@ async function ammio () {
   /* SEND ANALYTICS DATA */
   const response = await fetch(`http://${hostname}:${port}/analytics`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(analytics) }) // eslint-disable-line no-undef
   const visit = await response.json()
+
+  /* SEND PING */
+  if (!navigator.sendBeacon) return
+  setInterval(async () => {
+    console.log('ping')
+    const ping = JSON.stringify({ fingerprint: analytics.fingerprint, visit: visit })
+    navigator.sendBeacon(`http://${hostname}:${port}/analytics/ping`, ping)
+  }, 1000 * 60)
+
+  /* CALCULATE VISIT DURATION */
+  let start = new Date()
+  let duration = 0
+  const focus = () => { start = new Date() }
+  const blur = () => { duration += (new Date() - start.getTime()) / 1000 }
+  window.addEventListener('focus', focus)
+  window.addEventListener('blur', blur)
+
+  /* SEND CLOSE DATA ON PAGE UNLOAD */
+  function unload () {
+    if (unload._hasUnloaded) return
+    unload._hasUnloaded = true
+    blur()
+    const close = JSON.stringify({ fingerprint: analytics.fingerprint, duration: duration, visit: visit.id })
+    navigator.sendBeacon('http://localhost:3000/analytics/close', close)
+  }
+  window.addEventListener('unload', unload)
+  window.addEventListener('pagehide', unload)
 }
 
 if (tracking()) ammio()

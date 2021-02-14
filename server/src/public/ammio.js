@@ -66,7 +66,7 @@ async function ammio () {
   }
 
   /* CLIENT DATA */
-  const client = {
+  let client = {
     fingerprint: fingerprint(),
     page: window.location.pathname,
     referrer: window.document.referrer,
@@ -78,16 +78,12 @@ async function ammio () {
   }
 
   /* SEND ANALYTICS DATA */
-  const response = await fetch(`http://${hostname}:${port}/analytics`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(analytics) }) // eslint-disable-line no-undef
-  const visit = await response.json()
+  const response = await fetch(`http://${hostname}:${port}/analytics`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(client) }) // eslint-disable-line no-undef
+  client = await response.json()
 
   /* SEND PING */
   if (!navigator.sendBeacon) return
-  setInterval(async () => {
-    console.log('ping')
-    const ping = JSON.stringify({ fingerprint: client.fingerprint, visit: visit })
-    navigator.sendBeacon(`http://${hostname}:${port}/analytics/ping`, ping)
-  }, 1000 * 60)
+  setInterval(async () => navigator.sendBeacon(`http://${hostname}:${port}/analytics/online`, JSON.stringify(client)), 1000 * 60)
 
   /* CALCULATE VISIT DURATION */
   let start = new Date()
@@ -102,8 +98,9 @@ async function ammio () {
     if (unload._hasUnloaded) return
     unload._hasUnloaded = true
     blur()
-    const close = JSON.stringify({ fingerprint: client.fingerprint, duration: duration, visit: visit.id })
-    navigator.sendBeacon('http://localhost:3000/analytics/close', close)
+    client.duration = duration
+    client.online = false
+    navigator.sendBeacon('http://localhost:3000/analytics/online', JSON.stringify(client))
   }
   window.addEventListener('unload', unload)
   window.addEventListener('pagehide', unload)

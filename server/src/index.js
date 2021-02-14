@@ -4,7 +4,9 @@
 const Koa = require('koa')
 const cors = require('@koa/cors')
 const bodyParser = require('koa-bodyparser')
+const serve = require('koa-static')
 const MongoClient = require('mongodb').MongoClient
+const path = require('path')
 
 /* IMPORT ROUTERS */
 const apiRouter = require('./routes/api')
@@ -18,6 +20,7 @@ const MONGO_PORT = process.env.MONGO_PORT || 27017
 /* KOA SETUP */
 const app = new Koa()
 app.use(cors())
+app.use(serve(path.join(__dirname, '/public')))
 app.use(bodyParser({ enableTypes: ['json', 'text'] }))
 
 /* SETUP ROUTERS */

@@ -78,12 +78,12 @@ async function ammio () {
   }
 
   /* SEND ANALYTICS DATA */
-  const response = await fetch(`http://${hostname}:${port}/analytics`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(client) }) // eslint-disable-line no-undef
+  const response = await fetch(`http://${hostname}:${port}/api/analytics`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(client) }) // eslint-disable-line no-undef
   client = await response.json()
 
   /* SEND PING */
   if (!navigator.sendBeacon) return
-  setInterval(async () => navigator.sendBeacon(`http://${hostname}:${port}/analytics/online`, JSON.stringify(client)), 1000 * 60)
+  setInterval(async () => navigator.sendBeacon(`http://${hostname}:${port}/api/analytics/online`, JSON.stringify(client)), 1000 * 60)
 
   /* CALCULATE VISIT DURATION */
   let start = new Date()
@@ -100,7 +100,7 @@ async function ammio () {
     blur()
     client.duration = duration
     client.online = false
-    navigator.sendBeacon('http://localhost:3000/analytics/online', JSON.stringify(client))
+    navigator.sendBeacon('http://localhost:3000/api/analytics/online', JSON.stringify(client))
   }
   window.addEventListener('unload', unload)
   window.addEventListener('pagehide', unload)

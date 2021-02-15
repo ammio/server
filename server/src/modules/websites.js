@@ -7,10 +7,9 @@ class Websites {
   }
 
   async add (domain) {
-    //if (!/^(?!:\/\/)([a-zA-Z0-9-]+\.){0,5}[a-zA-Z0-9-][a-zA-Z0-9-]+\.[a-zA-Z]{2,64}?$/gi.test(domain)) throw new Error('website domain is not recognized as valid')
     if (await this.exists(domain)) throw new Error('website domain already in use')
     const website = await this.collection.insertOne({ domain: domain })
-    return website.insertedId
+    return website.ops[0]
   }
 
   async all () {

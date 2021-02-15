@@ -2,7 +2,6 @@
   "name": "ammio-server",
   "version": "0.0.0",
   "private": true,
-  "description": "",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -10,20 +9,6 @@
     "clean": "./scripts/clean",
     "lint": "standard"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ammio/ammio.git"
-  },
-  "author": {
-    "name": "Dominic Egginton",
-    "email": "dominic.egginton@gmail.com",
-    "url": "https://dominicegginton.dev"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ammio/ammio/issues"
-  },
-  "homepage": "https://github.com/ammio/ammio#readme",
   "devDependencies": {
     "nodemon": "^2.0.7",
     "standard": "^16.0.3"

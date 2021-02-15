@@ -22,16 +22,15 @@ class Authentication {
   }
 
   async login (client) {
-    if (!client.username || client.username.length === 0) return { authentication: false, token: null }
-    if (!client.password || client.password.length === 0) return { authentication: false, token: null }
+    if (!client.username || client.username.length === 0) return { authentication: false, token: null, user: null, admin: null }
+    if (!client.password || client.password.length === 0) return { authentication: false, token: null, user: null, admin: null }
     const data = await this.collection.findOne({ username: client.username })
-    if (data.length === 0) return { authentication: false, token: null }
-    console.log(data)
-    if (!await bcrypt.compare(client.password, data.password)) return { authentication: false, token: null }
+    if (!data) return { authentication: false, token: null, user: null, admin: null }
+    if (!await bcrypt.compare(client.password, data.password)) return { authentication: false, token: null, user: null, admin: null }
     const token = jwt.sign({ _id: data._id, username: data.username }, JWT_SECRET, { expiresIn: 86400 })
     let admin = false
     if (data.username === 'admin') admin = true
-    return { authentication: true, token: token, admin: admin }
+    return { authentication: true, token: token, user: data, admin: admin }
   }
 }
 

@@ -13,7 +13,6 @@ router.post('/', async ctx => {
   const client = ctx.request.body
   const admin = await new Authentication(ctx.database)
   const login = await admin.login(client)
-  if (!login.authentication) ctx.status = 404
   ctx.body = login
 })
 

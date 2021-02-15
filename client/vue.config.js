@@ -1,3 +1,12 @@
 module.exports = {
-  lintOnSave: true
+  lintOnSave: true,
+  devServer: {
+    proxy: {
+      '^/api': {
+        target: 'http://localhost:3000/',
+        ws: true,
+        changeOrigin: true
+      }
+    }
+  }
 }

@@ -8,7 +8,6 @@
     "start": "node src/index.js",
     "dev": "./scripts/development",
     "clean": "./scripts/clean",
-    "test": "jest --coverage",
     "lint": "standard"
   },
   "repository": {
@@ -26,8 +25,6 @@
   },
   "homepage": "https://github.com/ammio/ammio#readme",
   "devDependencies": {
-    "jest": "^26.6.3",
-    "mongodb-memory-server": "^6.9.3",
     "nodemon": "^2.0.7",
     "standard": "^16.0.3"
   },

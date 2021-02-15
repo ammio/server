@@ -29,7 +29,9 @@ class Authentication {
     console.log(data)
     if (!await bcrypt.compare(client.password, data.password)) return { authentication: false, token: null }
     const token = jwt.sign({ _id: data._id, username: data.username }, JWT_SECRET, { expiresIn: 86400 })
-    return { authentication: true, token: token }
+    let admin = false
+    if (data.username === 'admin') admin = true
+    return { authentication: true, token: token, admin: admin }
   }
 }
 

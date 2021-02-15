@@ -1,15 +1,12 @@
-# ammio
+# ammio `In Development`
 
-### `In Development`
-
-Built with a focus on privacy and simplicity from the ground up `ammio` is a self hosted open source alternative to Google Analytics.
+Built with a focus on privacy and simplicity from the ground up, `ammio` is a self hosted open source alternative to Google Analytics.
 
 #### Why ammio ?
-- **Moden Design**:
-- **Lightweight**:
-- **Live Visitors Counter**:
-- **Open website statistics**:
-- **Self Hosted**: 
+- **Moden Design**: ammio is built with a clean modern user interface that you will love to use
+- **Lightweight**: Nothing is included that is not needed with `ammio`, this means you can run ammio in small containers that use minimal system recourses
+- **Live Visitors Counter**: Want to see how many visitors are currently visiting your site in real time ? With `ammio` you can
+- **Self Hosted**: Designed to be self hosted, placing your in control of your data and statistics
 
 #### Metrics
 Here is some information `ammio` provides about your visitors: 

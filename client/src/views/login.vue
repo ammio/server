@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <h2>ammio</h2>
     <form @submit.prevent='onSubmit'>
       <input type='text' placeholder='username' required v-model='username'/>
       <input type='password' placeholder='password' required v-model='password'/>
@@ -27,3 +28,16 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.login
+  display: grid
+  grid-row-gap: 25px
+  justify-content: center
+  h2
+    text-align: center
+  form
+    display: grid
+    grid-row-gap: 10px
+    justify-content: center
+</style>

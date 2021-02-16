@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import dashboard from '../views/dashboard'
 import login from '../views/login'
+import home from '../views/home'
 
 const routes = [
   {
-    path: '/',
+    path: '/dashboard',
     name: 'dashboard',
     component: dashboard,
     meta: {
@@ -17,6 +18,14 @@ const routes = [
     component: login,
     meta: {
       private: false
+    }
+  },
+  {
+    path: '/',
+    name: 'home',
+    component: home,
+    meta: {
+      private: true
     }
   }
 ]

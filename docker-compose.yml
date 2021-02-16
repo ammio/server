@@ -1,0 +1,46 @@
+version: '3.3'
+
+services:
+  database:
+    container_name: database
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    networks:
+      - ammio
+    restart: always
+    volumes:
+      - ammio-database:/data/db
+  server:
+    container_name: server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - ammio
+    restart: always
+    environment:
+      MONGO_URL: database
+      MONGO_PORT: 27017
+    depends_on:
+      - database
+  client:
+    container_name: client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - ammio
+    restart: always
+    depends_on:
+      - server
+
+networks: 
+  ammio:
+volumes:
+  ammio-database:

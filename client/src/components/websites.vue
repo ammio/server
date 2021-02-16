@@ -1,17 +1,20 @@
 <template>
   <div class='websites'>
+    <newWebsite/>
     <website v-for='website in websites' :key='website._id' :website='website'/>
   </div>
 </template>
 
 <script>
+import newWebsite from './partials/newWebsite'
 import website from './partials/website'
 import { ref } from 'vue'
 
 export default {
   name: 'Dashbaord',
   components: {
-    website
+    website,
+    newWebsite
   },
   async setup () {
     const websites = ref(null)

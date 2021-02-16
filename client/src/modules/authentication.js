@@ -3,7 +3,6 @@
 export async function login (username, password) {
   const response = await fetch('/api/authentication', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: username, password: password }) })
   const login = await response.json()
-  console.log(login)
   if (login.authentication) {
     localStorage.setItem('authentication', login.authentication)
     localStorage.setItem('token', login.token)

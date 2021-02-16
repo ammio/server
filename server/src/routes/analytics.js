@@ -28,8 +28,10 @@ router.get('/online', async ctx => {
   ctx.body = await analytics.online(website)
 })
 
-router.get('/all', async ctx => {
+router.get('/get', async ctx => {
   const analytics = new Analytics(ctx.database)
-  ctx.body = await analytics.all()
+  const website = ctx.request.query.website
+  const timeframe = { start: ctx.request.query.start, end: ctx.request.query.end }
+  ctx.body = await analytics.get(website, timeframe)
 })
 module.exports = router

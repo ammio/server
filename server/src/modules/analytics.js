@@ -37,8 +37,34 @@ class Analytics {
     return result
   }
 
-  async all () {
-    return await this.collection.find().toArray()
+  async get (website, timeframe) {
+    // page visits
+    // unique visitors
+    // bounce rate
+    // avg duration
+    // pages
+    // referrers
+    // browser
+    // os
+    // device
+    // language
+
+    timeframe.start = ObjectID.createFromTime(new Date(timeframe.start) / 1000)
+    timeframe.end = ObjectID.createFromTime(new Date(timeframe.end) / 1000)
+    const data = await this.collection.find({ _id: { $gte: timeframe.start, $lte: timeframe.end }, website: website }).toArray()
+
+    const analytics = {
+      visits: 0,
+      visitors: 0,
+      duration: 0
+    }
+    if (data.length === 0) return analytics
+
+    analytics.visits = data.length
+    analytics.visitors = [...new Set(data.map(visit => visit.fingerprint))].length
+    analytics.duration = data.filter(visit => visit.duration !== undefined).reduce((total, next) => total + next.duration, 0) / data.length
+
+    return analytics
   }
 }
 

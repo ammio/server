@@ -22,6 +22,12 @@ router.post('/online', async ctx => {
   ctx.body = JSON.stringify(online)
 })
 
+router.get('/online', async ctx => {
+  const analytics = new Analytics(ctx.database)
+  const website = ctx.request.query.website
+  ctx.body = await analytics.online(website)
+})
+
 router.get('/all', async ctx => {
   const analytics = new Analytics(ctx.database)
   ctx.body = await analytics.all()

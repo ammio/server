@@ -1,7 +1,7 @@
 <template>
   <div class='navbar'>
     <h2>{{ heading }}</h2>
-    <button>logout</button>
+    <button v-on:click='logout'>logout</button>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     logout () {
-      logout()
+      if (logout()) this.$router.push('/login')
     }
   }
 }

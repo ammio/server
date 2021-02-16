@@ -1,6 +1,6 @@
 <template>
   <div class='website'>
-    <h3>{{ website.domain }}</h3>
+    <h3 v-on:click.self='dashboard'>{{ website.domain }}</h3>
     <Suspence>
       <online :id='website._id'/>
     </Suspence>
@@ -9,6 +9,7 @@
 
 <script>
 import online from './online'
+import router from '../../router'
 
 export default {
   components: { online },
@@ -18,6 +19,14 @@ export default {
   },
   props: {
     website: Object
+  },
+  methods: {
+    dashboard () {
+      router.push({
+        path: 'dashboard',
+        query: { id: this.website._id, domain: this.website.domain }
+      })
+    }
   }
 }
 </script>
@@ -31,4 +40,7 @@ export default {
     grid-template-columns: auto 1fr
     grid-column-gap: 25px
     align-items: center
+    h3
+      cursor: pointer
+      user-select: none
 </style>

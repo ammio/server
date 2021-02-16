@@ -1,17 +1,27 @@
 <template>
   <div class="dashboard">
-    <Header/>
-    <h1>Dashbaord</h1>
+    <navbar :heading='domain'/>
   </div>
 </template>
 
 <script>
-import Header from '../components/header'
+import navbar from '../components/navbar'
+import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 
 export default {
-  name: 'Dashbaord',
+  name: 'dashbaord',
   components: {
-    Header
+    navbar
+  },
+  setup () {
+    const route = useRoute()
+    const id = ref(null)
+    const domain = ref(null)
+
+    id.value = route.query.id
+    domain.value = route.query.domain
+    return { id, domain }
   }
 }
 </script>

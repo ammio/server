@@ -31,7 +31,7 @@ class Analytics {
     return log
   }
 
-  async online(website) {
+  async online (website) {
     const threshold = new Date(new Date() - 2 * 60000)
     const result = await this.collection.countDocuments({ website: website, online: { $gte: threshold } })
     return result

@@ -1,18 +1,23 @@
 <template>
   <div class="dashboard">
     <navbar :heading='domain'/>
+    <Suspense>
+      <analytics :website='id'/>
+    </Suspense>
   </div>
 </template>
 
 <script>
 import navbar from '../components/navbar'
+import analytics from '../components/analytics'
 import { useRoute } from 'vue-router'
 import { ref } from 'vue'
 
 export default {
   name: 'dashbaord',
   components: {
-    navbar
+    navbar,
+    analytics
   },
   setup () {
     const route = useRoute()
@@ -25,3 +30,10 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.dashboard
+  display: grid
+  grid-template-rows: auto 1fr
+  grid-row-gap: 15px
+</style>

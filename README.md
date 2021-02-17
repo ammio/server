@@ -1,4 +1,5 @@
-# ammio `In Development`
+# ammio
+### `In Development`
 
 Built with a focus on privacy and simplicity from the ground up, `ammio` is a self hosted open source alternative to Google Analytics.
 

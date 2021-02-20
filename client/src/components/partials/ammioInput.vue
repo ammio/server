@@ -22,7 +22,6 @@ export default {
 <style lang='sass' scoped>
 section.ammio-input
   position: relative
-  margin: 5px
   background: var(--color-background-alternative)
   border-radius: 12px
   display: block

@@ -76,6 +76,5 @@ section.focused
       left: 20px
 
 section input:valid ~ label
-  background: pink
   opacity: 0 !important
 </style>

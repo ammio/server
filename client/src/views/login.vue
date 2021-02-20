@@ -2,26 +2,31 @@
   <div class="login">
     <h2>ammio</h2>
     <form @submit.prevent='onSubmit'>
-      <input type='text' placeholder='username' required v-model='username'/>
-      <input type='password' placeholder='password' required v-model='password'/>
-      <button type='summit' @click='submit'>Login</button>
+      <ammio-input type='text' placeholder='Username' v-model='username'/>
+      <ammio-input type='password' placeholder='Password' v-model='password'/>
+      <ammio-button type="submit" @click="submit">Login</ammio-button>
     </form>
   </div>
 </template>
 
 <script>
 import { login } from '../modules/authentication'
-
+import ammioInput from '../components/partials/ammioInput'
+import ammioButton from '../components/partials/ammioButton'
 export default {
   name: 'Login',
   components: {
+    ammioInput,
+    ammioButton
   },
-  data () {
-    return { username: '', password: '' }
-  },
+  dat: () => ({
+    username: '',
+    password: ''
+  }),
   methods: {
     async submit (e) {
       e.preventDefault()
+      console.log('login >>>', this.username, this.password)
       if (await login(this.username, this.password)) this.$router.push('/')
       return false
     }
@@ -38,6 +43,6 @@ export default {
     text-align: center
   form
     display: grid
-    grid-row-gap: 10px
+    grid-row-gap: 15px
     justify-content: center
 </style>

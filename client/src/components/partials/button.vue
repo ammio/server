@@ -8,8 +8,7 @@
 
 <script>
 export default {
-  name: 'ammio-button',
-  inheritAttrs: false
+  name: 'ammio-button'
 }
 </script>
 
@@ -30,4 +29,9 @@ section.ammio-button
     border: none
     color: var(--color-text-alternative)
     outline: none
+    transition: 0.2s easy all
+  button:disabled
+    cursor: unset
+    background: var(--color-background-alternative)
+    color: var(--color-text)
 </style>

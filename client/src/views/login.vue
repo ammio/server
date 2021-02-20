@@ -11,13 +11,13 @@
 
 <script>
 import { login } from '../modules/authentication'
-import ammioInput from '../components/partials/ammioInput'
-import ammioButton from '../components/partials/ammioButton'
+import ammioInput from '../components/partials/input'
+import ammioButton from '../components/partials/button'
 export default {
   name: 'Login',
   components: {
-    ammioInput,
-    ammioButton
+    ammioButton,
+    ammioInput
   },
   dat: () => ({
     username: '',

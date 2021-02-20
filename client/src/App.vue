@@ -4,7 +4,7 @@
 
 <style lang="sass">
 body
-  background: #E8E8E8
+  background: var(--color-background)
 #app
   margin: 60px auto
   max-width: 1200px

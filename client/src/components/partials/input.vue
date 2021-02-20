@@ -1,21 +1,37 @@
 <template>
   <section class="ammio-input" :class="{ 'focused': focused }">
-    <input v-bind="$attrs" :type="$attrs.type ? $attrs.type : 'text'" @input="$emit('update:modelValue', $event.target.value)" @focus="focused = true" @blur="focused = false" required/>
+    <input v-bind="$attrs" :type="$attrs.type ? $attrs.type : 'text'" @input="$emit('update:modelValue', $event.target.value)" @focus="focus" @blur="blur" required/>
     <label>{{ placeholder }}</label>
   </section>
 </template>
 
 <script>
+/* IMPORT VUE MODLES */
+import { ref } from 'vue'
+
 export default {
   name: 'ammio-input',
-  inheritAttrs: false,
   props: {
     modelValue: String,
     placeholder: String
   },
-  data: () => ({
-    focused: false
-  })
+  setup () {
+    const focused = ref(false)
+
+    const focus = () => {
+      focused.value = true
+    }
+
+    const blur = () => {
+      focused.value = false
+    }
+
+    return {
+      focused,
+      focus,
+      blur
+    }
+  }
 }
 </script>
 

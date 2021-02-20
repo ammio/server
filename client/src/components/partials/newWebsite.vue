@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import router from '../../router'
 export default {
   name: 'newWebsite',
   data () {

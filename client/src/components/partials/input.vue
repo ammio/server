@@ -1,6 +1,6 @@
 <template>
   <section class="ammio-input" :class="{ 'focused': focused }">
-    <input v-bind="$attrs" :type="$attrs.type ? $attrs.type : 'text'" @input="$emit('update:modelValue', $event.target.value)" @focus="focus" @blur="blur" required/>
+    <input v-bind="$attrs" :type="$attrs.type ? $attrs.type : 'text'" @input="$emit('update:modelValue', $event.target.value)" @focus="focus" @blur="blur" :value="modelValue" required/>
     <label>{{ placeholder }}</label>
   </section>
 </template>

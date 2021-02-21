@@ -43,6 +43,7 @@ export default {
         await login(username.value, password.value)
         router.push({ name: 'home' })
       } catch (error) {
+        password.value = ''
         message.value = { title: 'Login Error', content: error.message }
       }
     }

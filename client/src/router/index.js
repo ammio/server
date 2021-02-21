@@ -36,8 +36,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(route => route.meta.private) && (localStorage.getItem('authenticated') === null && localStorage.getItem('token') === null)) next({ path: '/login', params: { nextURL: to.fullPath } })
-  else if (to.matched.some(route => !route.meta.private) && (localStorage.getItem('authenticated') === true || localStorage.getItem('token') !== null)) next({ path: '/', params: { nextURL: to.fullPath } })
+  if (to.matched.some(route => route.meta.private) && localStorage.getItem('token') === null) next({ path: '/login', params: { nextURL: to.fullPath } })
+  else if (to.matched.some(route => !route.meta.private) && localStorage.getItem('token') !== null) next({ path: '/', params: { nextURL: to.fullPath } })
   else next()
 })
 

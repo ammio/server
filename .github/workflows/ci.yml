@@ -15,6 +15,20 @@ jobs:
     - name: Lint
       run: npm run lint
       working-directory: server
+  unit-test-server:
+    name: Unit Test Server
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
+      with:
+        node-version: 14
+    - name: Install dependencies
+      run: npm i
+      working-directory: server
+    - name: Test
+      run: npm run test
+      working-directory: server
   lint-client:
     name: Lint Client
     runs-on: ubuntu-latest

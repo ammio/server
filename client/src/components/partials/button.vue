@@ -14,8 +14,6 @@ export default {
 
 <style lang="sass" scoped>
 section.ammio-button
-  width: 200px
-  height: 40px
   button
     background: var(--color-primary)
     position: relative
@@ -25,6 +23,7 @@ section.ammio-button
     cursor: pointer
     width: 100%
     height: 40px
+    padding: 0px 15px
     border-radius: 12px
     border: none
     color: var(--color-text-alternative)

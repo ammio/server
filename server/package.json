@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "./scripts/development",
-    "clean": "./scripts/clean",
+    "dev": "bash ./scripts/development",
+    "clean": "bash ./scripts/clean",
     "test": "jest --coverage",
     "coverage": "jest --coverage",
     "lint": "standard"

@@ -1,7 +1,6 @@
-# ammio
-### `In Development`
+![](./assets/cover.svg)
 
-Built with a focus on privacy and simplicity from the ground up, `ammio` is a self hosted open source alternative to Google Analytics.
+Built with a focus on privacy and simplicity from the ground up, `ammio` is a self hosted open source alternative to Google Analytics. 
 
 #### Why ammio ?
 - **Moden Design**: ammio is built with a clean modern user interface that you will love to use

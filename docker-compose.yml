@@ -10,7 +10,8 @@ services:
       - ammio
     restart: always
     volumes:
-      - ammio-database:/data/db
+      - ammio_database_data:/data/db
+      - ammio_database_config:/data/configdb
   server:
     container_name: server
     build:
@@ -43,4 +44,5 @@ services:
 networks: 
   ammio:
 volumes:
-  ammio-database:
+  ammio_database_data:
+  ammio_database_config:

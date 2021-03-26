@@ -1,16 +1,60 @@
 #!/bin/sh
 
-MONGO_CONTAINER_NAME=ammio_mongo
+DATABASE_NAME=ammio_database
+DATABASE_DATA="${DATABASE_NAME}_database"
+DATABASE_CONFIG="${DATABASE_NAME}_config"
 
-echo -n '• Development enviroment: '
-docker stop $MONGO_CONTAINER_NAME > /dev/null 2> /dev/null
-docker rm $MONGO_CONTAINER_NAME > /dev/null 2> /dev/null
-echo 'cleaned'
+echo -n '• Checking docker demon status: '
+if docker version > /dev/null 2> /dev/null
+then
+echo 'running'
+else
+echo 'cannot connect'
+echo  '• Please start the docker deamon and try again'
+exit
+fi
 
-read -p '• Remove database data? [y/N] ' yn
+echo -n '• Removing mongo database container: '
+if docker container inspect $DATABASE_NAME > /dev/null 2> /dev/null
+then
+  if docker stop $DATABASE_NAME  > /dev/null 2> /dev/null && docker rm $DATABASE_NAME  > /dev/null 2> /dev/null
+    then
+    echo 'removed'
+    else
+    echo 'error'
+    echo '• Please check the docker demon and try again'
+  fi
+else
+  echo 'removed'
+fi
+
+read -p '• Remove database data & config? [y/N] ' yn
 if [ "$yn" == "Y" ] || [ "$yn" == "y" ]
 then
-  echo -n '• Database data: '
-  docker volume rm $MONGO_CONTAINER_NAME > /dev/null 2> /dev/null
-  echo 'remove'
+  echo -n '• Removing databse data: '
+  if docker inspect $DATABASE_DATA > /dev/null 2> /dev/null
+  then
+    if docker volume rm $DATABASE_DATA > /dev/null 2> /dev/null
+    then
+      echo 'removed'
+    else
+      echo 'error'
+      echo '• Please check the docker demon and try again'
+    fi
+  else
+    echo 'removed'
+  fi
+  echo -n '• Removing database config: '
+  if docker inspect $DATABASE_CONFIG > /dev/null 2> /dev/null
+  then
+    if docker volume rm $DATABASE_CONFIG > /dev/null 2> /dev/null
+    then
+      echo 'removed'
+    else
+      echo 'error'
+      echo '• Please check the docker demon and try again'
+    fi
+  else
+    echo 'removed'
+  fi
 fi

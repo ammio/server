@@ -5,22 +5,61 @@ export PORT=3000
 export MONGO_URL=localhost
 export MONGO_PORT=27017
 
-MONGO_CONTAINER_NAME=ammio_mongo
+DATABASE_NAME=ammio_database
+DATABASE_DATA="${DATABASE_NAME}_database"
+DATABASE_CONFIG="${DATABASE_NAME}_config"
 
-trap clean INT
+trap shutodwn INT
 
-function clean () {
+function shutodwn () {
   echo ''
-  echo -n '• Development enviroment: '
-  docker stop $MONGO_CONTAINER_NAME  > /dev/null 2> /dev/null
-  docker rm $MONGO_CONTAINER_NAME  > /dev/null 2> /dev/null
-  echo 'cleaned'
+  echo -n '• Checking mongo database container status: '
+  if docker container inspect $DATABASE_NAME > /dev/null 2> /dev/null
+  then
+    echo 'running'
+    echo -n '• Removing mongo database container: '
+    if docker stop $DATABASE_NAME > /dev/null 2> /dev/null && docker rm $DATABASE_NAME > /dev/null 2> /dev/null
+    then
+      echo 'removed'
+    else
+      echo 'error'
+      echo '• Please check the docker demon and try again'
+    fi
+  fi
   exit
 }
 
-echo -n '• Mongo database container: '
-docker run --name $MONGO_CONTAINER_NAME -v $MONGO_CONTAINER_NAME:/data/db -p $MONGO_PORT:$MONGO_PORT/tcp -d mongo:latest  > /dev/null 2> /dev/null
-echo 'started'
+echo -n '• Checking docker demon status: '
+if docker version > /dev/null 2> /dev/null
+then
+  echo 'running'
+else
+  echo 'cannot connect'
+  echo  '• Please start the docker deamon and try again'
+  exit
+fi
 
-echo '• Development server:'
+echo -n '• Starting database container: '
+if docker container inspect $DATABASE_NAME > /dev/null 2> /dev/null
+then
+  if docker restart $DATABASE_NAME > /dev/null 2> /dev/null
+  then
+    echo 'started'
+  else
+    echo 'error'
+    echo '• Please check the docker demon and try again'
+    exit
+  fi
+else
+  if docker run --name $DATABASE_NAME -v $DATABASE_DATA:/data/db -v $DATABASE_CONFIG:/data/configdb -p $MONGO_PORT:$MONGO_PORT/tcp -d mongo:latest > /dev/null 2> /dev/null
+    then
+    echo 'started'
+  else
+    echo 'error'
+    echo '• Please check the docker demon and try again'
+    exit
+  fi
+fi
+
+echo '• Starting development server:'
 nodemon src/index.js

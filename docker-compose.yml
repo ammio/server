@@ -7,7 +7,7 @@ services:
     ports:
       - 27017:27017
     networks:
-      - ammio
+      - network
     restart: always
     volumes:
       - ammio_database_data:/data/db
@@ -20,7 +20,7 @@ services:
     ports:
       - 3000:3000
     networks:
-      - ammio
+      - network
     restart: always
     environment:
       MONGO_URL: database
@@ -36,13 +36,13 @@ services:
       - 80:80
       - 443:443
     networks:
-      - ammio
+      - network
     restart: always
     depends_on:
       - server
 
 networks: 
-  ammio:
+  network:
 volumes:
   ammio_database_data:
   ammio_database_config:

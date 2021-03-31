@@ -6,14 +6,22 @@
 </template>
 
 <script>
-/* IMPORT VUE MODLES */
+/* IMPORT VUE MODULES */
 import { ref } from 'vue'
 
 export default {
-  name: 'ammio-input',
+  name: 'base-input',
   props: {
-    modelValue: String,
-    placeholder: String
+    modelValue: {
+      type: String,
+      required: true,
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: ''
+    }
   },
   setup () {
     const focused = ref(false)
@@ -39,11 +47,11 @@ export default {
 section.ammio-input
   position: relative
   background: var(--color-background-alternative)
-  border-radius: 12px
+  border-radius: 3px
   display: block
   width: 200px
   height: 40px
-  padding: 10px 13px 10px 13px
+  padding: 10px 10px 10px 10px
   transition: 0.2s ease all
   --moz-transition: 0.2s ease all
   --webkit-transition: 0.2s ease all
@@ -52,7 +60,7 @@ section.ammio-input
     color: var(--color-text-dimmed)
     position: absolute
     pointer-events: none
-    left: 13px
+    left: 10px
     top: 50%
     transform: translateY(-50%)
     opacity: 0.5

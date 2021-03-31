@@ -4,21 +4,15 @@
       <h3>{{ message.title }}</h3>
       <p>{{ message.content }}</p>
       <div class="controls">
-        <ammio-button @click="$emit('close')">Close</ammio-button>
+        <base-button @click="$emit('close')">Close</base-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-/* IMPORT COMPOENTS */
-import ammioButton from './button'
-
 export default {
   name: 'ammio-message',
-  components: {
-    ammioButton
-  },
   props: {
     message: Object
   }

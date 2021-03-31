@@ -3,9 +3,9 @@
     <ammio-message v-if="message" :message="message" @close="closeMessage"/>
     <h2>ammio</h2>
     <form @submit.prevent="onSubmit">
-      <ammio-input type="text" placeholder="Username" v-model="username"/>
-      <ammio-input type='password' placeholder="Password" v-model="password"/>
-      <ammio-button type="submit" @click="submit">Login</ammio-button>
+      <base-input type="text" placeholder="Username" v-model="username"/>
+      <base-input type='password' placeholder="Password" v-model="password"/>
+      <base-button @click="submit" :loading="loading">Login</base-button>
     </form>
   </div>
 </template>
@@ -19,15 +19,11 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 /* IMPORT COMPONENTS */
-import ammioInput from '../components/partials/input'
-import ammioButton from '../components/partials/button'
 import ammioMessage from '../components/partials/message'
 
 export default {
   name: 'login-view',
   components: {
-    ammioButton,
-    ammioInput,
     ammioMessage
   },
   setup () {
@@ -37,13 +33,17 @@ export default {
     const password = ref('')
     const message = ref(null)
 
+    const loading = ref(false)
+
     const submit = async (event) => {
       event.preventDefault()
+      loading.value = true
       try {
         await login(username.value, password.value)
         router.push({ name: 'home' })
       } catch (error) {
         password.value = ''
+        loading.value = false
         message.value = { title: 'Login Error', content: error.message }
       }
     }
@@ -56,6 +56,7 @@ export default {
       username,
       password,
       message,
+      loading,
       submit,
       closeMessage
     }

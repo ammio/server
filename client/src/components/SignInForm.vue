@@ -1,31 +1,23 @@
 <template>
-  <div class="login">
-    <ammio-message v-if="message" :message="message" @close="closeMessage"/>
-    <h2>ammio</h2>
-    <form @submit.prevent="onSubmit">
-      <base-input type="text" placeholder="Username" v-model="username"/>
-      <base-input type='password' placeholder="Password" v-model="password"/>
-      <base-button @click="submit" :loading="loading">Login</base-button>
-    </form>
-  </div>
+  <form @submit.prevent="onSubmit">
+    <base-input type="text" placeholder="Username" v-model="username"/>
+    <base-input type='password' placeholder="Password" v-model="password"/>
+    <base-button @click="submit" :loading="loading">Login</base-button>
+  </form>
 </template>
 
 <script>
 /* IMPORT MODULES */
-import { login } from '../modules/authentication'
+import { login } from '../api/authentication'
 
 /* IMPORT VUE MODULES */
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 /* IMPORT COMPONENTS */
-import ammioMessage from '../components/partials/message'
 
 export default {
-  name: 'login-view',
-  components: {
-    ammioMessage
-  },
+  name: 'sign-in-form',
   setup () {
     const router = useRouter()
 
@@ -65,14 +57,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.login
+form
   display: grid
-  grid-row-gap: 25px
+  grid-row-gap: 15px
   justify-content: center
-  h2
-    text-align: center
-  form
-    display: grid
-    grid-row-gap: 15px
-    justify-content: center
 </style>

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import dashboard from '../views/dashboard'
-import login from '../views/login'
+import Login from '../views/Login'
 import home from '../views/home'
 import { token } from '../api/authentication'
 
@@ -16,7 +16,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: login,
+    component: Login,
     meta: {
       private: false
     }

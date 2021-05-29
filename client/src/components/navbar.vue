@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { logout } from '../modules/authentication'
+import { logout } from '../api/authentication'
 
 export default {
   name: 'heading',

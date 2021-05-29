@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import dashboard from '../views/dashboard'
 import login from '../views/login'
 import home from '../views/home'
+import { token } from '../api/authentication'
 
 const routes = [
   {
@@ -36,8 +37,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(route => route.meta.private) && localStorage.getItem('token') === null) next({ path: '/login', params: { nextURL: to.fullPath } })
-  else if (to.matched.some(route => !route.meta.private) && localStorage.getItem('token') !== null) next({ path: '/', params: { nextURL: to.fullPath } })
+  if (to.matched.some(route => route.meta.private) && token === null) next({ path: '/login', params: { nextURL: to.fullPath } })
+  else if (to.matched.some(route => !route.meta.private) && token !== null) next({ path: '/', params: { nextURL: to.fullPath } })
   else next()
 })
 
